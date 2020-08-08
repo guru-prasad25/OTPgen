@@ -2,11 +2,10 @@
 from twilio.rest import Client
 import os
 import secrets
-#hello2 is the file in which the variables are stored
-import hello2
 
-account_sid = hello2.TWIL_AUTH_SID
-auth_token = hello2.TWIL_AUTH_TOKEN
+#key data are stored as environment variables and obtained through os module
+account_sid = os.getenv(TWIL_ACC_SID)
+auth_token = os.getenv(TWIL_AUTH_TOKEN)
 
 reciever = str(input('Please enter your number'))
 #secrets is a module which produces crytographically safe numbers
@@ -16,5 +15,7 @@ client = Client(account_sid, auth_token)
 
 client.api.account.messages.create(
     to = reciever,
-    from_= hello2.TWIL_PHONE_NUMBER,
+    from_= os.getenv(TWIL_PHONE_NUMBER),
     body = f'The OTP is {otp} ' )
+
+
